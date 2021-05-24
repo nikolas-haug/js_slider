@@ -14,7 +14,6 @@ const nextBtn = document.getElementById('next-btn');
 function sliderLeft() {
     let firstSlide = document.querySelector('.slide:first-child');
     firstSlide.style.marginLeft = `-${width}`;
-    console.log(firstSlide);
     setTimeout(() => {
         document.querySelector('.slider-container').append(firstSlide);
         firstSlide.style.marginLeft = 0;
@@ -37,6 +36,24 @@ function sliderRight() {
     }, 10);
 
 }
+
+let timer = setInterval(sliderLeft, 3500);
+
+$('.slider-container').hover(function() {
+    clearInterval(timer);
+}, function() {
+    timer = setInterval(sliderLeft, 3500);
+});
+$('#prev-btn').hover(function() {
+    clearInterval(timer);
+}, function() {
+    timer = setInterval(sliderLeft, 3500);
+});
+$('#next-btn').hover(function() {
+    clearInterval(timer);
+}, function() {
+    timer = setInterval(sliderLeft, 3500);
+});
 
 prevBtn.addEventListener('click', sliderLeft);
 nextBtn.addEventListener('click', sliderRight);

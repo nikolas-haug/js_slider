@@ -8,7 +8,7 @@
 
 .main-container {
     margin: 150px auto;
-    width: 1140px;
+    max-width: 1140px;
     text-align: center;
 }
 
@@ -20,7 +20,7 @@
     background-color: blanchedalmond;
     display: flex;
     border: 1px solid #333;
-    /* overflow: hidden; */
+    overflow: hidden;
 }
 
 .slide {
