@@ -24,12 +24,18 @@ function sliderLeft() {
 function sliderRight() {
     let firstSlide = document.querySelector('.slide:first-child');
     let lastSlide = document.querySelector('.slide:last-child');
+
     lastSlide.style.marginLeft = `-${width}`;
+
     document.querySelector('.slider-container').prepend(lastSlide);
+
     firstSlide.style.marginLeft = `${width}`;
-    console.log(lastSlide);
-    // lastSlide.style.marginLeft = 0;
+
     firstSlide.style.marginLeft = 0;
+    setTimeout(() => {
+        lastSlide.style.marginLeft = 0;
+    }, 10);
+
 }
 
 prevBtn.addEventListener('click', sliderLeft);
