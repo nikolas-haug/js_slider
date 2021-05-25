@@ -98,6 +98,16 @@ function moveToDot() {
     }
     removeActiveClass();
     addActiveClass();
+    animateSlide();
+}
+
+function animateSlide() {
+    slides.forEach((slide) => {
+        slide.classList.add('fade-in');
+        setTimeout(() => {
+            slide.classList.remove('fade-in');
+        }, 250);
+    });
 }
 
 let timer = setInterval(sliderLeft, 3500);
