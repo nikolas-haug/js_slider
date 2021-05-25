@@ -71,7 +71,7 @@ body {
     border-radius: 50%;
     border: 2px solid #bbb;
     display: inline-block;
-    transition: background-color .6s ease;
+    transition: background-color .3s ease;
 }
 
 .dot.active {

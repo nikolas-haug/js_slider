@@ -19,11 +19,12 @@ function init() {
         slide.style.flexBasis = `${width}px`;
         slide.style.minWidth = `${width}px`;
     
-        slide.setAttribute('data-slide-index', i);
+        slide.setAttribute('data-slide-index', i + 1);
     
         const dot = document.createElement('span');
         dot.setAttribute('class', 'dot');
-        dot.setAttribute('data-slide-dot', i);
+        dot.setAttribute('data-slide-dot', i + 1);
+        dot.addEventListener('click', moveToDot);
     
         document.querySelector('.slide-navigation').appendChild(dot);
     });
@@ -73,6 +74,35 @@ function addActiveClass() {
     document.querySelector(`.dot[data-slide-dot="${slideIndex}"]`).classList.add('active');
 }
 
+function moveToDot() {
+    let dotDataIndex = this.getAttribute('data-slide-dot');
+    // let selectedSlide = document.querySelector(`.slide[data-slide-index="${dotDataIndex}"]`);
+
+    let currentFirstSlide = document.querySelector('.slider-container div:first-child');
+    let slideIndex = currentFirstSlide.getAttribute('data-slide-index');
+
+    console.log(dotDataIndex - slideIndex);
+
+    let increment = dotDataIndex - slideIndex;
+    console.log(increment);
+
+    if(increment < 0) {
+        for(let i = 0; i < Math.abs(increment); i++) {
+            let lastSlide = document.querySelector('.slide:last-child');
+            sliderContainer.prepend(lastSlide);
+        }
+    } else {
+        for(let i = 0; i < increment; i++) {
+            let firstSlide = document.querySelector('.slide:first-child');
+            sliderContainer.append(firstSlide);
+        }
+    }
+
+
+    removeActiveClass();
+    addActiveClass();
+}
+
 let timer = setInterval(sliderLeft, 3500);
 
 $('.slider-container').hover(function() {
@@ -80,6 +110,14 @@ $('.slider-container').hover(function() {
 }, function() {
     timer = setInterval(sliderLeft, 3500);
 });
+
+$('.slide-navigation').on('mouseenter', '.dot', function() {
+    clearInterval(timer);
+});
+$('.slide-navigation').on('mouseleave', '.dot', function() {
+    timer = setInterval(sliderLeft, 3500);
+});
+
 $('#prev-btn').hover(function() {
     clearInterval(timer);
 }, function() {
